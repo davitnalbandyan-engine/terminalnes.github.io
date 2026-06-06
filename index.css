@@ -1,5 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
 :root {
     --bg: #f7f9fc;
     --surface: #ffffff;
@@ -75,12 +104,28 @@ nav a {
     color: var(--text-muted);
     font-size: 0.95rem;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: color 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.4s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 nav a:hover,
 nav a.active {
     color: var(--accent);
+}
+
+nav a.active::after {
+    width: 100%;
 }
 
 .hero {
@@ -149,25 +194,49 @@ nav a.active {
     padding: 14px 22px;
     border-radius: 999px;
     font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.button-primary::before,
+.button-secondary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none;
+}
+
+.button-primary:hover::before,
+.button-secondary:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .button-primary {
-    background: var(--accent);
+    background: linear-gradient(135deg, #0f4fff 0%, #0a3fd0 100%);
     color: #ffffff;
     border: none;
-    box-shadow: 0 16px 40px rgba(15, 79, 255, 0.16);
+    box-shadow: 0 16px 40px rgba(15, 79, 255, 0.16),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .button-secondary {
     border: 1px solid var(--border);
-    background: #ffffff;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fbfd 100%);
     color: var(--text-strong);
 }
 
 .button-primary:hover,
 .button-secondary:hover {
-    transform: translateY(-1px);
+    transform: translateY(-4px);
 }
 
 .hero-visual {
@@ -198,21 +267,33 @@ nav a.active {
     border-radius: 28px;
     display: flex;
     align-items: flex-end;
-    transition: flex 0.6s ease, transform 0.3s ease;
+    transition: flex 0.7s cubic-bezier(0.23, 1, 0.320, 1), transform 0.4s ease;
     background-size: cover;
     background-position: center;
+    border: 1px solid rgba(15, 79, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) inset,
+                0 0 1px rgba(15, 79, 255, 0.1) inset;
 }
 
 .showcase-card:hover {
     flex: 2.2;
+    transform: scale(1.02);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4) inset,
+                0 0 2px rgba(15, 79, 255, 0.2) inset,
+                0 0 60px rgba(15, 79, 255, 0.1) inset;
 }
 
 .showcase-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.72) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.68) 100%);
     pointer-events: none;
+    transition: all 0.6s ease;
+}
+
+.showcase-card:hover::before {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.78) 100%);
 }
 
 .showcase-card::after {
@@ -222,8 +303,14 @@ nav a.active {
     right: 0;
     bottom: 0;
     height: 45%;
-    background: linear-gradient(180deg, transparent 0%, rgba(6, 12, 26, 0.92) 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(6, 12, 26, 0.95) 100%);
     pointer-events: none;
+    transition: all 0.6s ease;
+}
+
+.showcase-card:hover::after {
+    height: 55%;
+    background: linear-gradient(180deg, transparent 0%, rgba(6, 12, 26, 0.98) 100%);
 }
 
 .showcase-content {
@@ -231,6 +318,11 @@ nav a.active {
     z-index: 1;
     padding: 36px;
     color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.showcase-card:hover .showcase-content {
+    transform: translateY(-8px);
 }
 
 .showcase-content h2 {
@@ -238,6 +330,12 @@ nav a.active {
     font-size: clamp(2rem, 3vw, 3rem);
     line-height: 1.05;
     letter-spacing: -0.03em;
+    transition: all 0.4s ease;
+}
+
+.showcase-card:hover .showcase-content h2 {
+    transform: scale(1.04);
+    color: #ffffff;
 }
 
 .showcase-link {
@@ -248,12 +346,24 @@ nav a.active {
     color: #ffffff;
     font-weight: 600;
     opacity: 0.92;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+}
+
+.showcase-link::after {
+    content: '→';
+    display: inline-block;
+    margin-left: 4px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .showcase-link:hover {
-    transform: translateX(4px);
+    transform: translateX(8px);
     opacity: 1;
+}
+
+.showcase-link:hover::after {
+    transform: translateX(4px);
 }
 
 .showcase-mechatronics {
@@ -322,7 +432,19 @@ nav a.active {
     font-weight: 600;
     text-align: left;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.vision-tab::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(15, 79, 255, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
 }
 
 .vision-tab.active,
@@ -330,12 +452,18 @@ nav a.active {
     background: rgba(15, 79, 255, 0.16);
     border-color: rgba(15, 79, 255, 0.32);
     color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.vision-tab:hover::before {
+    opacity: 1;
 }
 
 .vision-copy {
     margin-top: 32px;
     display: none;
     color: #cbd5f1;
+    animation: slideUp 0.5s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .vision-copy--active {
@@ -369,6 +497,25 @@ nav a.active {
     padding-left: 24px;
     color: #d3deff;
     line-height: 1.7;
+    transition: all 0.3s ease;
+    animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.320, 1) backwards;
+}
+
+.vision-list li:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.vision-list li:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.vision-list li:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.vision-list li:hover {
+    transform: translateX(4px);
+    color: #ffffff;
 }
 
 .vision-list li::before {
@@ -389,13 +536,31 @@ nav a.active {
 
 .vision-viewport-frame {
     min-height: 680px;
-    background: #08111f;
-    border: 1px solid rgba(15, 79, 255, 0.18);
+    background: linear-gradient(135deg, #08111f 0%, #0a1420 100%);
+    border: 1px solid rgba(15, 79, 255, 0.2);
     border-radius: 32px;
     padding: 28px;
-    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4),
+                0 0 1px rgba(15, 79, 255, 0.2) inset,
+                inset 0 0 60px rgba(15, 79, 255, 0.08);
     display: flex;
     flex-direction: column;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.vision-viewport-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(15, 79, 255, 0.4), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+    background-size: 200% 100%;
+    pointer-events: none;
 }
 
 .vision-viewport-header {
@@ -414,13 +579,15 @@ nav a.active {
     background: radial-gradient(circle at top left, rgba(15, 79, 255, 0.14), transparent 28%),
                 radial-gradient(circle at bottom right, rgba(0, 255, 173, 0.08), transparent 30%),
                 #0b1322;
+    box-shadow: inset 0 0 40px rgba(15, 79, 255, 0.1),
+                inset 0 0 1px rgba(15, 79, 255, 0.2);
 }
 
 .vision-screen-image {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s cubic-bezier(0.23, 1, 0.320, 1);
     background-size: cover;
     background-position: center;
 }
@@ -455,11 +622,35 @@ nav a.active {
 .vision-overlay-box {
     padding: 12px 16px;
     border-radius: 16px;
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(15, 79, 255, 0.28);
+    background: linear-gradient(135deg, rgba(15, 79, 255, 0.15), rgba(0, 255, 173, 0.08));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(15, 79, 255, 0.32);
     color: #e7f1ff;
     font-size: 0.95rem;
     letter-spacing: 0.01em;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 0 8px 32px rgba(15, 79, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: floatBox 3s ease-in-out infinite;
+}
+
+@keyframes floatBox {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.vision-overlay-box:hover {
+    background: linear-gradient(135deg, rgba(15, 79, 255, 0.25), rgba(0, 255, 173, 0.12));
+    border-color: rgba(15, 79, 255, 0.48);
+    box-shadow: 0 16px 48px rgba(15, 79, 255, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                0 0 20px rgba(15, 79, 255, 0.1);
+    transform: translateY(-2px);
 }
 
 .vision-overlay-box:last-child {
@@ -471,9 +662,19 @@ nav a.active {
     display: grid;
     gap: 14px;
     padding: 22px 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(15, 79, 255, 0.05));
+    border: 1px solid rgba(15, 79, 255, 0.12);
     border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+}
+
+.vision-telemetry:hover {
+    border-color: rgba(15, 79, 255, 0.24);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .telemetry-row {
@@ -548,23 +749,59 @@ nav a.active {
 }
 
 .feature-panel {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 28px;
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafd 100%);
+    border: 1px solid rgba(15, 79, 255, 0.12);
+    border-radius: 28px;
+    padding: 32px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08),
+                0 0 1px rgba(15, 79, 255, 0.1) inset,
+                0 0 80px rgba(15, 79, 255, 0.06) inset;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(15, 79, 255, 0.08), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.feature-panel:hover {
+    transform: translateY(-8px);
+    border-color: rgba(15, 79, 255, 0.24);
+    box-shadow: 0 32px 64px rgba(15, 23, 42, 0.12),
+                0 0 1px rgba(15, 79, 255, 0.2) inset,
+                0 0 120px rgba(15, 79, 255, 0.1) inset;
+}
+
+.feature-panel:hover::before {
+    opacity: 1;
 }
 
 .feature-panel h2 {
-    margin: 0 0 12px;
-    font-size: 1.2rem;
+    margin: 0 0 14px;
+    font-size: 1.3rem;
     color: var(--text-strong);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
 }
 
 .feature-panel p {
     margin: 0;
     color: var(--text-muted);
     font-size: 0.98rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
 }
 
 .section {
@@ -587,16 +824,42 @@ nav a.active {
 }
 
 .card {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fbfd 100%);
+    border: 1px solid rgba(15, 79, 255, 0.12);
+    border-radius: 28px;
     padding: 32px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06),
+                0 0 1px rgba(15, 79, 255, 0.08) inset;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(15, 79, 255, 0.1), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease, top 0.6s ease, left 0.6s ease;
+    pointer-events: none;
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+    transform: translateY(-12px);
+    border-color: rgba(15, 79, 255, 0.28);
+    box-shadow: 0 32px 80px rgba(15, 23, 42, 0.12),
+                0 0 2px rgba(15, 79, 255, 0.16) inset,
+                0 0 100px rgba(15, 79, 255, 0.08) inset;
+}
+
+.card:hover::before {
+    opacity: 1;
+    top: -50%;
+    left: -50%;
 }
 
 .card-flag {
