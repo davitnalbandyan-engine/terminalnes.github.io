@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal NES</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="brand"><img src="logo.png" alt="Terminal NES logo">TERMINAL NES</div>
+            <nav>
+                <a href="#overview" class="active">Overview</a>
+                <a href="#capabilities">Capabilities</a>
+                <a href="#sectors">Sectors</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="overview">
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <div class="eyebrow">ENGINEERING THE PHYSICAL WORLD</div>
+                    <h1>Hardware prototyping and mechatronics integration for bold ideas.</h1>
+                    <p>We design, build, and iterate advanced embedded hardware and integrated mechanical systems—taking your complex concepts from schematic to functional, production-ready prototype.</p>
+                    <div class="hero-actions">
+                        <a href="#capabilities" class="button-primary">Explore capabilities</a>
+                        <a href="#contact" class="button-secondary">Let's build</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="feature-panel">
+                        <h2>Embedded Systems & PCB Design</h2>
+                        <p>Custom hardware layout, microcontroller integration, and firmware development optimized for performance and space constraints.</p>
+                    </div>
+                    <div class="feature-panel">
+                        <h2>Mechatronic Integration</h2>
+                        <p>Seamless fusion of mechanical enclosures, structural assemblies, and precision actuation with electronic controls.</p>
+                    </div>
+                    <div class="feature-panel">
+                        <h2>Rapid Hardware R&D</h2>
+                        <p>High-fidelity prototyping, sensor validation, and agile engineering iterations to radically accelerate your time-to-market.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="vision-ai-section" id="vision-ai">
+            <div class="vision-ai-inner">
+                <aside class="vision-sidebar">
+                    <div class="vision-header">
+                        <div class="eyebrow">REAL-TIME INTELLIGENCE AT THE EDGE</div>
+                        <h2>Vision AI Integrated into Physical Hardware</h2>
+                    </div>
+                    <div class="vision-tabs" role="tablist">
+                        <button id="vision-tab-camera" type="button" class="vision-tab active" data-vision-tab="camera" aria-controls="vision-panel-camera" aria-selected="true" role="tab">01. Intelligent Camera Nodes</button>
+                        <button id="vision-tab-uav" type="button" class="vision-tab" data-vision-tab="uav" aria-controls="vision-panel-uav" aria-selected="false" role="tab">02. Autonomous UAV Payloads</button>
+                    </div>
+                    <div id="vision-panel-camera" class="vision-copy vision-copy--active" data-vision-panel="camera" role="tabpanel" aria-labelledby="vision-tab-camera" aria-hidden="false">
+                        <h3>High-Speed Computer Vision on Resource-Constrained Hardware</h3>
+                        <p>We integrate optimized neural networks directly onto local camera hardware, bypassing cloud latency and security vulnerabilities. Designed for millisecond-level inference in manufacturing lines, traffic infrastructure, and security assets.</p>
+                        <ul class="vision-list">
+                            <li>On-device defect & anomaly detection (sub-10ms latency).</li>
+                            <li>Embedded model quantization for low-power edge deployment.</li>
+                            <li>Multi-camera sensor fusion and edge gateway routing.</li>
+                        </ul>
+                    </div>
+                    <div id="vision-panel-uav" class="vision-copy" data-vision-panel="uav" role="tabpanel" aria-labelledby="vision-tab-uav" aria-hidden="true">
+                        <h3>GPS-Denied Navigation & Real-Time Aerial Perception</h3>
+                        <p>Giving unmanned aerial systems the power to think, reason, and adapt without a constant ground-station or cloud connection. Our payloads excel in visually degraded, denied, or high-risk environments.</p>
+                        <ul class="vision-list">
+                            <li>Real-time target tracking and autonomous optical path optimization.</li>
+                            <li>Visual-Inertial Odometry (VIO) for stable navigation without GPS.</li>
+                            <li>Lightweight, low SWaP-C (Size, Weight, Power, and Cost) hardware footprints.</li>
+                        </ul>
+                    </div>
+                </aside>
+                <div class="vision-viewport">
+                    <div class="vision-viewport-frame">
+                        <div class="vision-viewport-header">
+                            <div class="eyebrow">Live Telemetry Viewport</div>
+                        </div>
+                        <div class="vision-viewport-screen">
+                            <div class="vision-screen-image vision-screen-camera vision-screen-active" data-vision-panel="camera" style="background-image: url('aicamera.png');">
+                                <div class="vision-overlay-items">
+                                    <div class="vision-overlay-box">Bracket_01: 99.4%</div>
+                                    <div class="vision-overlay-box">Fastener_04: 98.2%</div>
+                                </div>
+                            </div>
+                            <div class="vision-screen-image vision-screen-uav" data-vision-panel="uav" style="background-image: url('uavai.png');">
+                                <div class="vision-overlay-items">
+                                    <div class="vision-overlay-box">Horizon Lock: 100%</div>
+                                    <div class="vision-overlay-box">Obstacle Track: 3m</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vision-telemetry">
+                            <div class="telemetry-row" data-vision-panel="camera">
+                                <div><strong>Hardware:</strong> Terminal NES Custom NPU Accelerator</div>
+                                <div><strong>Inference Speed:</strong> 4.2 ms</div>
+                                <div><strong>Power Draw:</strong> &lt; 2.5W</div>
+                            </div>
+                            <div class="telemetry-row hidden" data-vision-panel="uav">
+                                <div><strong>Platform:</strong> Jetson Orin / Hailo Embedded Stack</div>
+                                <div><strong>Neural Architecture:</strong> Quantized Vision Transformer</div>
+                                <div><strong>BVLOS Status:</strong> Fully Autonomous Autopilot Link</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showcase-section">
+            <div class="showcase-grid">
+                <article class="showcase-card showcase-mechatronics">
+                    <div class="showcase-content">
+                        <div class="eyebrow">MECHATRONICS</div>
+                        <h2>Mechatronic Integration</h2>
+                        <a href="#capabilities" class="showcase-link">See our builds →</a>
+                    </div>
+                </article>
+                <article class="showcase-card showcase-embedded">
+                    <div class="showcase-content">
+                        <div class="eyebrow">EMBEDDED HARDWARE</div>
+                        <h2>Embedded Systems</h2>
+                        <a href="#capabilities" class="showcase-link">Explore firmware & hardware →</a>
+                    </div>
+                </article>
+                <article class="showcase-card showcase-prototyping">
+                    <div class="showcase-content">
+                        <div class="eyebrow">RAPID PROTOTYPING</div>
+                        <h2>Rapid Hardware R&D</h2>
+                        <a href="#capabilities" class="showcase-link">Accelerate development →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="capabilities">
+            <h2 class="section-title">What we deliver</h2>
+            <div class="cards">
+                <article class="card">
+                    <div class="card-flag">SOLUTIONS</div>
+                    <h3>Integrated Hardware</h3>
+                    <p>Fully functional, unified mechanical and electronic assemblies engineered to perform reliably under real-world conditions.</p>
+                </article>
+                <article class="card">
+                    <div class="card-flag">EXPERTISE</div>
+                    <h3>Smart Automation</h3>
+                    <p>Implementation of custom sensor arrays, precise motor/servo controls, and robust communication protocols for intelligent physical devices.</p>
+                </article>
+                <article class="card">
+                    <div class="card-flag">INNOVATION</div>
+                    <h3>Agile Iteration</h3>
+                    <p>A rapid, feedback-driven development pipeline that transforms concept designs into physical proof-of-concepts with lightning speed.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="sectors" style="background: var(--surface-soft);">
+            <h2 class="section-title">Focused sectors</h2>
+            <div class="cards">
+                <article class="card">
+                    <div class="card-flag">AUTOMOTIVE & INDUSTRIAL</div>
+                    <h3>Embedded Toolkits</h3>
+                    <p>Custom control units, sensor networks, and robust hardware interfaces built to withstand rugged operating environments.</p>
+                </article>
+                <article class="card">
+                    <div class="card-flag">IOT & SMART DEVICES</div>
+                    <h3>Connected Products</h3>
+                    <p>Compact, energy-efficient connected devices utilizing cutting-edge wireless architectures and custom form factors.</p>
+                </article>
+                <article class="card">
+                    <div class="card-flag">ROBOTICS</div>
+                    <h3>Custom Actuation</h3>
+                    <p>Precision motion control, specialized mechatronic linkages, and integrated physical drive systems.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contact">
+        <p>Connect with our engineering team to accelerate your hardware R&D, build your next prototype, or solve complex mechatronic challenges.</p>
+        <p>&copy; 2026 Terminal NES</p>
+    </footer>
+    <script defer src="index.js"></script>
+</body>
+</html>
