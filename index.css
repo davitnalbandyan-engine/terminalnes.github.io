@@ -536,13 +536,6 @@ nav a.active {
         flex-direction: column;
         height: auto;
     }
-}
-
-@media (max-width: 900px) {
-    .showcase-grid {
-        flex-direction: column;
-        height: auto;
-    }
 
     .showcase-card {
         height: 420px;
