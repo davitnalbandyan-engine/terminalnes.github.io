@@ -1,8 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('main section[id]');
+    const sectionLinkMap = {};
 
     navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            sectionLinkMap[targetId.slice(1)] = link;
+        }
+
         link.addEventListener('click', function (event) {
             const targetId = this.getAttribute('href');
             if (targetId.startsWith('#')) {
@@ -17,25 +23,47 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    function updateActiveLink() {
-        let currentSectionId = '';
-
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= 120 && rect.bottom > 120) {
-                currentSectionId = section.getAttribute('id');
-            }
+    function setActiveLink(sectionId) {
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + sectionId);
         });
-
-        if (currentSectionId) {
-            navLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === '#' + currentSectionId);
-            });
-        }
     }
 
-    updateActiveLink();
-    window.addEventListener('scroll', updateActiveLink);
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -60% 0px',
+            threshold: 0.1,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveLink(entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    } else {
+        function updateActiveLink() {
+            let currentSectionId = '';
+
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 120 && rect.bottom > 120) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            if (currentSectionId) {
+                setActiveLink(currentSectionId);
+            }
+        }
+
+        updateActiveLink();
+        window.addEventListener('scroll', updateActiveLink);
+    }
 
     const visionTabs = document.querySelectorAll('.vision-tab');
     const visionCopies = document.querySelectorAll('.vision-copy');
