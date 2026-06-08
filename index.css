@@ -832,7 +832,7 @@ nav a.active::after {
     display: grid;
     grid-template-columns: 2.2fr 1fr;
     gap: 28px;
-    align-items: start;
+    align-items: stretch;
     margin-bottom: 40px;
 }
 
