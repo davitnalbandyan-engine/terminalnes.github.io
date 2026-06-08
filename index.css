@@ -836,6 +836,135 @@ nav a.active::after {
     margin-bottom: 40px;
 }
 
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3, 8, 17, 0.82);
+    z-index: 999;
+    padding: 24px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-panel {
+    width: min(920px, 100%);
+    background: rgba(12, 18, 31, 0.98);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 40px;
+}
+
+.modal-content h2 {
+    margin: 0 0 16px;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    color: #ffffff;
+}
+
+.modal-content p {
+    color: #b8c9e6;
+    margin: 0 0 28px;
+    line-height: 1.75;
+}
+
+.contact-form-grid {
+    margin: 0 auto 32px;
+    max-width: 1200px;
+}
+
+.contact-form {
+    display: grid;
+    gap: 24px;
+    padding: 32px;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.input-group {
+    display: grid;
+    gap: 10px;
+    color: #d1dce8;
+    font-size: 0.95rem;
+}
+
+.input-group span {
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8ca4c5;
+}
+
+.contact-input,
+.contact-textarea {
+    width: 100%;
+    padding: 18px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f6fbff;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+    color: #8ca4c5;
+}
+
+.contact-textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+.contact-submit {
+    width: fit-content;
+    min-width: 200px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #0f4fff 0%, #0a3fd0 100%);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 18px 50px rgba(15, 79, 255, 0.25);
+}
+
+.contact-note {
+    margin: 0;
+    color: #a3b5ce;
+    font-size: 0.95rem;
+}
+
 .contact-hero {
     padding: 36px;
     border-radius: 32px;
@@ -913,22 +1042,28 @@ nav a.active::after {
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    align-items: stretch;
+    grid-auto-rows: 1fr;
 }
 
 .contact-card {
-    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px;
     border-radius: 28px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.04);
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
+    min-height: 260px;
 }
 
 .contact-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 34px 70px rgba(0, 0, 0, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 32px 68px rgba(0, 0, 0, 0.22);
 }
 
 .contact-card--light {
@@ -936,7 +1071,7 @@ nav a.active::after {
 }
 
 .contact-card--accent {
-    background: linear-gradient(180deg, rgba(5, 255, 202, 0.14), rgba(10, 30, 54, 0.9));
+    background: linear-gradient(180deg, rgba(5, 255, 202, 0.14), rgba(10, 30, 54, 0.95));
     border-color: rgba(5, 255, 202, 0.22);
 }
 
@@ -948,7 +1083,7 @@ nav a.active::after {
 .contact-card-head {
     display: inline-block;
     margin-bottom: 18px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #7ce7ff;

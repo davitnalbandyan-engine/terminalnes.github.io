@@ -210,7 +210,7 @@
                         <p class="contact-intro">From UAV avionics to edge AI and defense-grade electronics, our team turns complex ideas into hardware that performs.</p>
                         <div class="contact-actions">
                             <a href="mailto:hello@terminalnes.systems" class="button-secondary contact-button">Email our team</a>
-                            <a href="#overview" class="button-primary contact-button">Start a brief</a>
+                            <button type="button" class="button-primary contact-button" id="open-brief">Start a brief</button>
                         </div>
                     </div>
                     <div class="contact-stats">
@@ -228,6 +228,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="contact-grid">
                     <article class="contact-card contact-card--light">
                         <div class="contact-card-head">Headquarters</div>
@@ -257,6 +258,37 @@
             </div>
         </section>
     </main>
+
+    <div class="modal-overlay" id="brief-modal" aria-hidden="true">
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="brief-modal-title">
+            <button type="button" class="modal-close" id="close-brief" aria-label="Close brief form">×</button>
+            <div class="modal-content">
+                <h2 id="brief-modal-title">Start a brief</h2>
+                <p>Share your idea, requirements, and timeline. We’ll get back to you quickly.</p>
+                <form id="brief-form" class="contact-form" action="https://formsubmit.co/hello@terminalnes.systems" method="POST">
+                    <input type="hidden" name="_subject" value="New brief request from Terminal NES">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_honey" value="">
+                    <div class="contact-form-grid">
+                        <label class="input-group">
+                            <span>Name</span>
+                            <input class="contact-input" type="text" name="name" placeholder="Your name" required>
+                        </label>
+                        <label class="input-group">
+                            <span>Email</span>
+                            <input class="contact-input" type="email" name="email" placeholder="you@example.com" required>
+                        </label>
+                        <label class="input-group" style="grid-column: 1 / -1;">
+                            <span>Project brief</span>
+                            <textarea class="contact-textarea" name="message" rows="5" placeholder="Tell us about your idea, timeline, and what you need." required></textarea>
+                        </label>
+                    </div>
+                    <button type="submit" class="button-primary contact-submit">Send brief</button>
+                    <p class="contact-note">Submissions are sent directly to hello@terminalnes.systems via Formsubmit.co.</p>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <p>Connect with our engineering team to accelerate your hardware R&D, build your next prototype, or solve complex mechatronic challenges.</p>

@@ -131,4 +131,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initVisionTabs();
+
+    const openBrief = document.getElementById('open-brief');
+    const briefModal = document.getElementById('brief-modal');
+    const closeBrief = document.getElementById('close-brief');
+
+    function toggleBriefModal(show) {
+        if (!briefModal) return;
+        briefModal.classList.toggle('active', show);
+        briefModal.setAttribute('aria-hidden', show ? 'false' : 'true');
+        document.body.style.overflow = show ? 'hidden' : '';
+    }
+
+    if (openBrief && briefModal) {
+        openBrief.addEventListener('click', function () {
+            toggleBriefModal(true);
+        });
+    }
+
+    if (closeBrief) {
+        closeBrief.addEventListener('click', function () {
+            toggleBriefModal(false);
+        });
+    }
+
+    if (briefModal) {
+        briefModal.addEventListener('click', function (event) {
+            if (event.target === briefModal) {
+                toggleBriefModal(false);
+            }
+        });
+    }
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            toggleBriefModal(false);
+        }
+    });
 });
