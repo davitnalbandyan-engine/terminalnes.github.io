@@ -251,36 +251,36 @@ nav a.active::after {
 }
 
 .showcase-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
-    height: 680px;
+    min-height: 680px;
     max-width: 100%;
     margin: 0 auto;
     padding: 0 24px 24px;
 }
 
 .showcase-card {
-    flex: 1;
     min-width: 0;
     position: relative;
     overflow: hidden;
     border-radius: 28px;
     display: flex;
     align-items: flex-end;
-    transition: flex 0.7s cubic-bezier(0.23, 1, 0.320, 1), transform 0.4s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     background-size: cover;
     background-position: center;
     border: 1px solid rgba(15, 79, 255, 0.08);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) inset,
                 0 0 1px rgba(15, 79, 255, 0.1) inset;
+    min-height: 680px;
 }
 
 .showcase-card:hover {
-    flex: 2.2;
-    transform: scale(1.02);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4) inset,
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.34) inset,
                 0 0 2px rgba(15, 79, 255, 0.2) inset,
-                0 0 60px rgba(15, 79, 255, 0.1) inset;
+                0 0 42px rgba(15, 79, 255, 0.08) inset;
 }
 
 .showcase-card::before {
@@ -289,7 +289,7 @@ nav a.active::after {
     inset: 0;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.68) 100%);
     pointer-events: none;
-    transition: all 0.6s ease;
+    transition: background 0.25s ease;
 }
 
 .showcase-card:hover::before {
@@ -305,7 +305,7 @@ nav a.active::after {
     height: 45%;
     background: linear-gradient(180deg, transparent 0%, rgba(6, 12, 26, 0.95) 100%);
     pointer-events: none;
-    transition: all 0.6s ease;
+    transition: height 0.25s ease, background 0.25s ease;
 }
 
 .showcase-card:hover::after {
@@ -318,7 +318,7 @@ nav a.active::after {
     z-index: 1;
     padding: 36px;
     color: #ffffff;
-    transition: all 0.5s ease;
+    transition: transform 0.25s ease;
 }
 
 .showcase-card:hover .showcase-content {
@@ -364,6 +364,29 @@ nav a.active::after {
 
 .showcase-link:hover::after {
     transform: translateX(4px);
+}
+
+@media (max-width: 900px) {
+    .showcase-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .showcase-card {
+        min-height: 320px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .showcase-card,
+    .showcase-card::before,
+    .showcase-card::after,
+    .showcase-content,
+    .showcase-content h2,
+    .showcase-link {
+        transition: none !important;
+        animation: none !important;
+    }
 }
 
 .showcase-mechatronics {
